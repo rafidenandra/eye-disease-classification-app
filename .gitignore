@@ -1,0 +1,7 @@
+# Ignore some folders in this parent directory
+
+# Deep Learning Model folder
+deep-learning-model/trained_model
+
+
+
