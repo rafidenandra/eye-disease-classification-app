@@ -14,7 +14,7 @@ from flask import Flask, request, json
 
 # ==== Flask Setup ====
 
-UPLOAD_FOLDER_DIR = 'D:\\Kuliah\\Proyek Akhir 2022\\eye-disease-classification-using-cnn\\eye-disease-classification-backend\\static\\images'
+UPLOAD_FOLDER_DIR = 'D:\\Kuliah\\Proyek Akhir 2022\\eye-disease-classification-app\\eye-disease-classification-backend\\static\\images'
 
 app = Flask(__name__)
 cors_app = CORS(app)
