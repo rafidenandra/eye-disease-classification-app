@@ -10,12 +10,12 @@ function LandingPage() {
     return (
         <div
             className={
-                'bg-gradient-to-r from-slate-50 to-slate-100 text-sky-900 p-6'
+                'bg-gradient-to-r from-slate-50 to-slate-100 text-sky-900 p-6 pt-12'
             }>
             <div className={'container mx-auto max-w-screen-lg'}>
                 <header
                     className={
-                        'font-medium inline-flex justify-center items-center gap-x-2 mb-12 sm:mb-24 md:mb-32'
+                        'font-medium inline-flex justify-center items-center gap-x-2 mb-20 sm:mb-24 md:mb-32'
                     }>
                     <span>
                         <img src={AppLogo} alt='app-logo' />
@@ -61,7 +61,7 @@ function LandingPage() {
 
                     <div
                         className={
-                            'flex flex-col items-center justify-center gap-y-8 md:w-72 lg:w-full mx-auto text-center'
+                            'flex flex-col items-center justify-center gap-y-8 md:w-72 lg:w-full mx-auto text-center mb-20'
                         }>
                         <p className={'text-2xl font-medium text-center'}>
                             Eye Diseases

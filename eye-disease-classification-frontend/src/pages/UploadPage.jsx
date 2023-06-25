@@ -61,7 +61,7 @@ function UploadPage() {
     return (
         <div
             className={
-                'bg-gradient-to-r from-slate-50 to-slate-100 text-sky-900 p-6 min-h-screen'
+                'bg-gradient-to-r from-slate-50 to-slate-100 text-sky-900 p-6 min-h-screen pt-12'
             }>
             <div className={'container mx-auto max-w-screen-lg'}>
                 <header
