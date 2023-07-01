@@ -15,3 +15,7 @@ deep-learning-model/split_folder_dataset.ipynb
 eye-disease-classification-backend/__pycache__/
 *.pyc
 *.pyo
+
+# Else
+eye-disease-classification-backend/static/upload/images/
+eye-disease-classification-backend/trained_model/

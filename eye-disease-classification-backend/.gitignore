@@ -1,1 +1,4 @@
-/trained_model
+trained_model/
+trained_model/*
+static/upload/images/
+static/upload/images/*
