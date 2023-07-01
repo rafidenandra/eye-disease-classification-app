@@ -17,3 +17,26 @@ the app using Anaconda3 or other similar tools.
    > :information_source: Follow the tutorial in this [link](https://www.tensorflow.org/install/pip#windows-native).
 
 4. Run 'transfer_learning_2_mixed_resnet50 (final).ipynb'
+5. After the model has been saved, put the model under the 'trained_model' folder in backend directory
+6. Adjust all of the path inside the Flask app
+7. Run the backend side
+
+    ```bash
+    flask --app server --debug run
+    ```
+
+8. Install npm if you don't have it
+9. Open cmd or powershell and go to frontend directory, and install the dependencies
+    
+    ```bash
+    npm install
+    ```
+    
+10. Run the frontend side
+
+    ```bash
+    npm run dev
+    ```
+
+11. Open the link on the local browser
+12. You're good to go!
