@@ -15,41 +15,44 @@ from flask import Flask, request, json
 # ==== Flask Setup ====
 
 # Adjust this directory below to where you cloned the repo.
-UPLOAD_FOLDER_DIR = 'D:\\Kuliah\\Proyek Akhir 2022\\eye-disease-classification-app\\eye-disease-classification-backend\\static\\upload\\images'
+UPLOAD_FOLDER_DIR = "static/upload/images"
 
 app = Flask(__name__)
 cors_app = CORS(app)
-app.config['UPLOAD_FOLDER_DIR'] = UPLOAD_FOLDER_DIR
-app.config['CORS_HEADERS'] = 'Content-Type'
-app.config['SECRET_KEY'] = 'eyediseaseclassificationappSecretKey'
-app.config['JSON_SORT_KEYS'] = False
+app.config["UPLOAD_FOLDER_DIR"] = UPLOAD_FOLDER_DIR
+app.config["CORS_HEADERS"] = "Content-Type"
+app.config["SECRET_KEY"] = "eyediseaseclassificationappSecretKey"
+app.config["JSON_SORT_KEYS"] = False
 
 # ==== Image Checking ====
 
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
-invalid_extension_message = 'Invalid format image!'
+ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
+invalid_extension_message = "Invalid format image!"
+
 
 def image_format_checking(filename):
-    return '.' in filename and \
-        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS 
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 # ==== API Routes ====
 
-@app.route('/')
+
+@app.route("/")
 @cross_origin()
 def index():
-    return 'This is the Eye Disease Classification App API'
+    return "This is the Eye Disease Classification App API"
 
-@app.route('/upload-image', methods=['POST'])
+
+@app.route("/upload-image", methods=["POST"])
 @cross_origin()
 def upload_image():
-    if request.method == 'POST':
-        file = request.files['eye-image']
-        
+    if request.method == "POST":
+        file = request.files["eye-image"]
+
         if file and image_format_checking(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER_DIR'], filename))
-            img_path = os.path.join(app.config['UPLOAD_FOLDER_DIR'], filename)
+            file.save(os.path.join(app.config["UPLOAD_FOLDER_DIR"], filename))
+            img_path = os.path.join(app.config["UPLOAD_FOLDER_DIR"], filename)
             img = file.filename
 
             print(img_path)
@@ -59,17 +62,18 @@ def upload_image():
 
             response = app.response_class(
                 json.dumps(prediction, sort_keys=False),
-                mimetype=app.config['JSONIFY_MIMETYPE']
+                mimetype=app.config["JSONIFY_MIMETYPE"],
             )
 
-            print('response:', response)
+            print("response:", response)
 
             return response
         else:
-            error = 'Mohon upload gambar dengan format png, jpg, atau jpeg.'
+            error = "Mohon upload gambar dengan format png, jpg, atau jpeg."
             return error
     else:
         return "Unsupported Request Method"
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     app.run(debug=True)
