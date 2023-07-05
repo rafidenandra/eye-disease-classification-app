@@ -64,6 +64,7 @@ function UploadPage() {
                 'bg-gradient-to-r from-slate-50 to-slate-100 text-sky-900 p-6 min-h-screen pt-12'
             }>
             <div className={'container mx-auto max-w-screen-lg'}>
+                {/* Header or Navbar */}
                 <header
                     className={
                         'font-medium inline-flex justify-center items-center gap-x-2 mb-12 sm:mb-24 md:mb-32'
@@ -73,108 +74,165 @@ function UploadPage() {
                     </span>
                     <p>EDC App</p>
                 </header>
-                <div className={'flex flex-col gap-y-10 mx-auto'}>
-                    <form onSubmit={onSubmitImage}>
-                        <label className={'font-medium'} htmlFor='upload-image'>
-                            Upload Image
-                        </label>
-                        <input
-                            id='upload-image'
-                            type='file'
-                            onChange={onSelectFile}
-                            className={
-                                'block w-full mt-2 text-sm text-sky-900 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-100 border-2 border-slate-1000 rounded-lg p-4'
-                            }
-                        />
-                        <Button className={'mt-6'} type='submit'>
-                            {loading ? (
-                                <TailSpin
-                                    radius='2'
-                                    color='#ffffff'
-                                    ariaLabel='tail-spin-loading'
-                                    height={24}
-                                    width={24}
-                                    visible={true}
-                                />
-                            ) : (
-                                'Predict'
-                            )}
-                        </Button>
-                    </form>
-                    <div>
-                        {selectedFile && (
-                            <img
-                                className={'w-56 rounded-lg shadow-lg mx-auto'}
-                                src={preview}
-                                alt='eye-disease-preview'
-                            />
-                        )}
-                    </div>
-                </div>
 
+                {/* Section Wrapper */}
                 <div
                     className={
-                        'flex flex-row gap-3 mx-auto mt-16 justify-evenly'
+                        'flex flex-col gap-y-16 mb-16 mx-auto sm:gap-y-20 md:gap-y-28'
                     }>
-                    <div
-                        className={
-                            'mt-4 flex flex-col justify-center items-center'
-                        }>
-                        {prediction && (
-                            <>
-                                <p className={'text-lg'}>Prediction:</p>
-                                <p className={'text-3xl'}>
-                                    {Object.keys(prediction)[0]}
-                                </p>
-                                <p className={'mt-6 text-lg'}>
-                                    Confidence Rate:
-                                </p>
-                                <p className={'text-3xl'}>
-                                    {(
-                                        prediction[Object.keys(prediction)[0]] *
-                                        100
-                                    ).toFixed(2)}{' '}
-                                    %
-                                </p>
-                            </>
-                        )}
-                    </div>
+                    {/* Upload Form Section */}
+                    <section>
+                        <form onSubmit={onSubmitImage}>
+                            <label
+                                className={'font-medium'}
+                                htmlFor='upload-image'>
+                                Upload Image
+                            </label>
+                            <input
+                                id='upload-image'
+                                type='file'
+                                onChange={onSelectFile}
+                                className={
+                                    'block w-full mt-2 text-sm text-sky-900 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-100 file:text-sky-900 hover:file:bg-blue-100 border-2 border-slate-1000 rounded-lg p-4 cursor-pointer'
+                                }
+                            />
+                            <Button className={'mt-6'} type='submit'>
+                                {loading ? (
+                                    <TailSpin
+                                        radius='2'
+                                        color='#ffffff'
+                                        ariaLabel='tail-spin-loading'
+                                        height={24}
+                                        width={24}
+                                        visible={true}
+                                    />
+                                ) : (
+                                    'Classify'
+                                )}
+                            </Button>
+                        </form>
+                    </section>
 
-                    {prediction && (
-                        <>
-                            <span
-                                className={'border-r border-slate-300'}></span>
+                    {/* Image Preview Section */}
+                    <section>
+                        <div>
+                            <p
+                                className={
+                                    'text-2xl font-medium text-center mb-6'
+                                }>
+                                Image Preview
+                            </p>
+                            {selectedFile && (
+                                <img
+                                    className={
+                                        'xs:w-3/4 sm:w-1/2 md:w-64 rounded-lg shadow-lg mx-auto'
+                                    }
+                                    src={preview}
+                                    alt='eye-disease-preview'
+                                />
+                            )}
+                        </div>
+                    </section>
+
+                    {/* Classification Result Section */}
+                    <section className='flex flex-col gap-y-10'>
+                        <p className={'text-2xl font-medium text-center'}>
+                            Classification Result
+                        </p>
+
+                        {/* Wrapper */}
+                        <div
+                            className={
+                                'flex flex-col gap-x-10 items-center justify-center gap-y-8 mx-auto text-center md:w-full lg:flex-row'
+                            }>
                             <div
                                 className={
-                                    'mt-4 p-4 border border-slate-300 rounded-lg flex flex-col justify-center items-center '
+                                    'flex flex-col justify-center items-center'
                                 }>
-                                <table
-                                    style={{ padding: '100px' }}
-                                    className={'p-10 text-center'}>
-                                    <tr>
-                                        <th>Number</th>
-                                        <th>Eye Disease</th>
-                                        <th>Probability</th>
-                                    </tr>
-                                    {Object.entries(prediction).map(
-                                        ([key, value], index) => {
-                                            return (
-                                                <tr key={index}>
-                                                    <td>{index + 1}</td>
-                                                    <td>{key}</td>
-                                                    <td>
-                                                        {`${(
-                                                            value * 100
-                                                        ).toFixed(2)} %`}
-                                                    </td>
-                                                </tr>
-                                            );
-                                        }
-                                    )}
-                                </table>
+                                {prediction && (
+                                    <>
+                                        <p className={'text-lg'}>Prediction:</p>
+                                        <p className={'text-3xl'}>
+                                            {Object.keys(prediction)[0]}
+                                        </p>
+                                        <p className={'mt-6 text-lg'}>
+                                            Confidence Rate:
+                                        </p>
+                                        <p className={'text-3xl'}>
+                                            {(
+                                                prediction[
+                                                    Object.keys(prediction)[0]
+                                                ] * 100
+                                            ).toFixed(2)}{' '}
+                                            %
+                                        </p>
+                                    </>
+                                )}
                             </div>
-                        </>
-                    )}
+
+                            <span
+                                className={
+                                    'border-r border-slate-900 m-10'
+                                }></span>
+
+                            {/* Table Section */}
+                            {prediction && (
+                                <>
+                                    <div className='border rounded-lg mx-4'>
+                                        <div>
+                                            <table className='table-auto overflow-x-auto w-full bg-white rounded-lg'>
+                                                <thead>
+                                                    <tr>
+                                                        <th className='bg-sky-100 rounded-tl-lg p-4'>
+                                                            Rank
+                                                        </th>
+                                                        <th className='bg-sky-100 p-4'>
+                                                            Eye Disease
+                                                        </th>
+                                                        <th className='bg-sky-100 rounded-tr-lg p-4'>
+                                                            Probability
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {Object.entries(
+                                                        prediction
+                                                    ).map(
+                                                        (
+                                                            [key, value],
+                                                            index
+                                                        ) => {
+                                                            return (
+                                                                <tr
+                                                                    className='border-b'
+                                                                    key={index}>
+                                                                    <td className='p-4'>
+                                                                        {index +
+                                                                            1}
+                                                                    </td>
+                                                                    <td className='p-4'>
+                                                                        {key}
+                                                                    </td>
+                                                                    <td className='p-4'>
+                                                                        {`${(
+                                                                            value *
+                                                                            100
+                                                                        ).toFixed(
+                                                                            2
+                                                                        )} %`}
+                                                                    </td>
+                                                                </tr>
+                                                            );
+                                                        }
+                                                    )}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </>
+                            )}
+                        </div>
+                    </section>
                 </div>
             </div>
         </div>
